@@ -1,0 +1,93 @@
+spring:
+  data:
+    redis:
+      database: 0
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 1
+          max-wait: 2000
+          enabled: true
+        shutdown-timeout: 1000ms
+      client-type: lettuce
+      connect-timeout: 2000ms
+      sentinel:
+        password: secretpassword
+        master: mymaster
+        nodes: my-release-redis.redis-dev.svc.cluster.local:26379
+      password: secretpassword
+      client-name: ${spring.application.name}-${spring.profiles.active}
+  application:
+    name: san-francisco
+  cloud:
+    consul:
+      host: consul-client.consul-dev.svc.cluster.local
+      port: 8500
+      config:
+        enabled: true
+        prefixes: config
+        format: yaml
+        data-key: data
+        watch:
+          enabled: true
+          delay: 1000
+          wait-time: 55
+      discovery:
+        enabled: true
+        register: true
+        deregister: true
+        instance-group: san-francisco-group
+        prefer-ip-address: true
+        service-name: ${spring.application.name}-${spring.profiles.active}
+        instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}
+        health-check-timeout: 10s
+        health-check-critical-timeout: 30m
+        catalog-services-watch-timeout: 3
+        health-check-path: ${server.servlet.context-path}/actuator/health
+        health-check-interval: 10s
+        register-health-check: true
+        lifecycle:
+          enabled: true
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 32
+        max-interval: 2000
+  config:
+    import: 'optional:consul:'
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: secretpassword
+    url: jdbc:mysql://my-release-mysql-primary.mysql-cluster.svc.cluster.local:3306/san-francisco?characterEncoding=UTF-8&failOverReadOnly=false&secondsBeforeRetryMaster=0&queriesBeforeRetryMaster=0&serverTimezone=Asia/Shanghai&useUnicode=true&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=60000
+    hikari:
+      connection-timeout: 30_000
+      idle-timeout: 60_000
+      keepalive-time: 60_000
+      max-lifetime: 180_000
+      validation-timeout: 500
+      read-only: false
+      minimum-idle: 2
+      maximum-pool-size: 8
+      pool-name: sanFranciscoHikariPool
+      auto-commit: true
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    cache-enabled: false
+    aggressive-lazy-loading: true
+    lazy-loading-enabled: false
+    use-generated-keys: true
+    map-underscore-to-camel-case: true
+    local-cache-scope: session
+  mapper-locations: classpath:mapper/*.xml
+debug: true
+san:
+  francisco:
+    web:
+      welcome-index: welcome

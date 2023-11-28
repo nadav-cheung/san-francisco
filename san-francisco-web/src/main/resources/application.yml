@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  shutdown: graceful
+  servlet:
+    context-path: /san-francisco
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  profiles:
+    active: local
+  application:
+    name: san-francisco
+  tracing:
+    console:
+      enabled: true
+management:
+  tracing:
+    enabled: true
+    propagation:
+      consume: b3
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
