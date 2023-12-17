@@ -1,8 +1,8 @@
 package cn.com.nadav.sanfrancisco.configure;
 
 
-import cn.com.nadav.sanfrancisco.dao.properties.CommonProperties;
-import cn.com.nadav.sanfrancisco.dao.properties.DaoProperties;
+import cn.com.nadav.sanfrancisco.common.properties.CommonProperties;
+import cn.com.nadav.sanfrancisco.common.properties.DaoProperties;
 import cn.com.nadav.sanfrancisco.service.properties.ServiceProperties;
 import cn.com.nadav.sanfrancisco.share.properties.ShareProperties;
 import cn.com.nadav.sanfrancisco.task.properties.TaskProperties;
