@@ -1,7 +1,6 @@
 package cn.com.nadav.sanfrancisco.configure;
 
 
-import cn.com.nadav.sanfrancisco.common.properties.CommonProperties;
 import cn.com.nadav.sanfrancisco.common.properties.DaoProperties;
 import cn.com.nadav.sanfrancisco.service.properties.ServiceProperties;
 import cn.com.nadav.sanfrancisco.share.properties.ShareProperties;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({
-//        CommonProperties.class,
         DaoProperties.class,
         ServiceProperties.class,
         TaskProperties.class,

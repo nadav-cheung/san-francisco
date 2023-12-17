@@ -12,11 +12,7 @@
 
     <artifactId>san-francisco-common</artifactId>
 
-
-
     <dependencies>
-
-
         <dependency>
             <groupId>io.zipkin.brave</groupId>
             <artifactId>brave-instrumentation-servlet-jakarta</artifactId>
