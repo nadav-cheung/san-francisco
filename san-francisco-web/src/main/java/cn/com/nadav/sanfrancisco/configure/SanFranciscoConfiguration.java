@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({
-        CommonProperties.class,
+//        CommonProperties.class,
         DaoProperties.class,
         ServiceProperties.class,
         TaskProperties.class,
