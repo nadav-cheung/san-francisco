@@ -26,8 +26,8 @@ metadata:
     app: san-francisco
     environment: dev
 spec:
-  replicas: 2
-  revisionHistoryLimit: 5
+  replicas: 3
+  revisionHistoryLimit: 12
   selector:
     matchLabels:
       app: san-francisco-pod
@@ -153,9 +153,9 @@ spec:
                 command:
                   - "/bin/sh"
                   - "-c"
-                  - "echo preStop >> /dev/termination-log"
+                  - "sleep 10"
       restartPolicy: Always
-      terminationGracePeriodSeconds: 40
+      terminationGracePeriodSeconds: 45
       volumes:
         - name: app-logs
           emptyDir:
@@ -180,7 +180,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: san-francisco
-  targetCPUUtilizationPercentage: 85
+  targetCPUUtilizationPercentage: 80
 ---
 
 # service
